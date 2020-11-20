@@ -67,10 +67,9 @@ $(function(){
 		<%@ include file="basic.jsp"%>
 		<div class="centercontent">
 			<div class="pageheader">
-				<h1 class="pagetitle">data</h1>
-				<span class="pagedesc">数据信息</span>
+				<h1 class="pagetitle">字段信息</h1>
 				<ul class="hornav">
-					<li class="current">基本信息</li>
+					<li class="current"><a>基本信息</a></li>
 					<a id="add" class="btn btn2 btn_book"><span>添加</span></a>
 					<a id="delete" class="btn btn2 btn_book" onclick="return deldata()"><span>删除</span></a>
 				</ul>
@@ -89,7 +88,7 @@ $(function(){
 				</div>
 				<div id="inbox" class="subcontent">
 					<table cellpadding="0" cellspacing="0" border="0"
-						class="stdtable mailinbox">
+						class="stdtable mailinbox" style="word-break:break-all; word-wrap:break-all;">
 						<thead id="wxh1">
 						</thead>
 						<tbody id="wxh2">

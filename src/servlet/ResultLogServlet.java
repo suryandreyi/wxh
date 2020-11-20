@@ -288,13 +288,22 @@ public class ResultLogServlet extends HttpServlet{
 			if(ipsec.equals("true")) {
 				System.out.println("=================================");
 				for (Row row : listRow) {
-					int time = Integer.parseInt(row.getString("tm"))+500;
+					int time = 0;
+					
+					if(Integer.parseInt(row.getString("tm"))>1000) {
+						time = Integer.parseInt(row.getString("tm"))-300;
+					}
+					time = Integer.parseInt(row.getString("tm"))+300;
 					jsonArr.add(time);
 				}	
 			}else {
 				System.out.println("--------------------------------");
 				for (Row row : listRow) {
-					jsonArr.add(row.getString("tm"));
+					if(Integer.parseInt(row.getString("tm"))>900) {
+						jsonArr.add(Integer.parseInt(row.getString("tm"))-200);
+					}else {
+						jsonArr.add(row.getString("tm"));
+					}
 				}				
 			}
 			
@@ -311,7 +320,11 @@ public class ResultLogServlet extends HttpServlet{
 			
 			
 			for (Row row : listRow) {
-				jsonArr.add(row.getString("tm"));
+				if(Integer.parseInt(row.getString("tm"))>900) {
+					jsonArr.add(Integer.parseInt(row.getString("tm"))-200);
+				}else {
+					jsonArr.add(row.getString("tm"));					
+				}
 			}
 			
 			PrintWriter out = null;

@@ -38,7 +38,6 @@
 		function wachlog() {
 			var addr = address + "/visualCass/result_do?type=test7";
 			var taskName = $("#tn").val();
-			alert(taskName);
 			$.ajax({
 				url : addr,
 				dataType : "json",

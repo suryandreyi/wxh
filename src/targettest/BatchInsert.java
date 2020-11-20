@@ -37,6 +37,7 @@ public class BatchInsert{
 	public int insert1(String key, String tab, String path, String resultPath,String insertSumnum,String resultNum,String taskName) {
 		Session session = DBUtil_ALL.getSess();
 		int rn = Integer.parseInt(resultNum);
+		int rsn = Integer.parseInt(insertSumnum);
 
 		List<String> columnsList = new ArrayList<String>();
 		Map<String, String> columntype = new HashMap<String, String>();
@@ -84,6 +85,7 @@ public class BatchInsert{
 		long endTime = 0;
 		int i = 0;
 		int j = 0;
+		int tnum=0;
 		try {
 			br = new BufferedReader(new FileReader(new File(path)));
 			stratTime = System.currentTimeMillis();
@@ -101,7 +103,11 @@ public class BatchInsert{
 						logger.info("time:---------------------"+ tm); 
 						System.out.println("time:---------------------"+ tm);
 						j = 0;
+						tnum++;
 						stratTime = System.currentTimeMillis();
+					}
+					if(tnum >= (rsn/rn)) {
+						break;
 					}
 					if (i >= 100) {
 						session.execute(batchStatement);
@@ -148,7 +154,8 @@ public class BatchInsert{
 		}
 		Session session = DBUtil_ALL.getSess();
 		int rn = Integer.parseInt(resultNum);
-
+		int rsn = Integer.parseInt(insertSumnum);
+		
 		List<String> columnsList = new ArrayList<String>();
 		Map<String, String> columntype = new HashMap<String, String>();
 
@@ -195,6 +202,7 @@ public class BatchInsert{
 		long endTime = 0;
 		int i = 0;
 		int j = 0;
+		int tnum=0;
 		try {
 			br = new BufferedReader(new FileReader(new File(path)));
 			stratTime = System.currentTimeMillis();
@@ -212,7 +220,11 @@ public class BatchInsert{
 						logger.info("time:---------------------"+ tm);
 						System.out.println("time:---------------------"+ tm);
 						j = 0;
+						tnum++;
 						stratTime = System.currentTimeMillis();
+					}
+					if(tnum >= (rsn/rn)) {
+						break;
 					}
 					if (i >= 100) {
 						session.execute(batchStatement);
@@ -253,7 +265,8 @@ public class BatchInsert{
 	public int insert5(String key, String tab, String path, String resultPath,String insertSumnum,String resultNum,String taskName) {
 		Session session = DBUtil_ALL.getSess();
 		int rn = Integer.parseInt(resultNum);
-
+		int rsn = Integer.parseInt(insertSumnum);
+		
 		List<String> columnsList = new ArrayList<String>();
 		Map<String, String> columntype = new HashMap<String, String>();
 
@@ -299,6 +312,7 @@ public class BatchInsert{
 		long endTime = 0;
 		int i = 0;
 		int j = 0;
+		int tnum=0;
 		try {
 			br = new BufferedReader(new FileReader(new File(path)));
 			stratTime = System.currentTimeMillis();
@@ -316,7 +330,11 @@ public class BatchInsert{
 						logger.info("time:---------------------"+ tm);
 						System.out.println("time:---------------------"+ tm);
 						j = 0;
+						tnum++;
 						stratTime = System.currentTimeMillis();
+					}
+					if(tnum >= (rsn/rn)) {
+						break;
 					}
 					if (i >= 100) {
 						session.execute(batchStatement);

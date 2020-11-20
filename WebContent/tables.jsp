@@ -37,10 +37,10 @@ $(function(){
 					str += "<tr class='unread'>" + 
 					"<td align='center'><input type='checkbox'/></td>" +
 					"<td><a href='"+address+"/visualCass/tabtodata_do?keyspace="+i+"&table="+n+"' class='title'>"+ n +"</a></td>" +
-					"<td>"+ n +"</td>" +
+					"<td>"+ m +"</td>" +
 					"</tr>"
 					})
-					})
+			})
 					sx.innerHTML = str;
 			$("#inbox").css('display', 'block');
 			$("#loader").css('display', 'none');
