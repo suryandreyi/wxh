@@ -36,8 +36,15 @@ a:link,a:visited,a:hover,a:active {
             </ul>
         </li>
         <br/>
-		<!--<li><a href="filemanager.html" class="gallery">文件管理</a></li>-->
-		<li><a href="watchlog.jsp" class="widgets">运维日志</a></li>
+		
+		
+		<li>
+            <a href="###" class="one_bar">运维信息</a>
+            <ul class="two_bar">
+				<li><a href="watchlog.jsp">运维日志</a></li>
+				<li><a href="clusternode.jsp">集群状态</a></li>
+            </ul>
+        </li>
 		 <br/>
 		<li><a href="safeconf.jsp" class="widgets">安全配置</a></li>
 		 <br/>

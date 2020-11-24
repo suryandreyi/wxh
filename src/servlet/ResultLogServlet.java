@@ -3,7 +3,6 @@ package servlet;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.text.DecimalFormat;
 import java.util.HashMap;
@@ -26,7 +25,6 @@ import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import sshutil.SFTP;
 import sshutil.SFTPUtil;
-import utils.DBUtil;
 import utils.DBUtil_ALL;
 import utils.DBUtil_ONE;
 
@@ -40,9 +38,64 @@ public class ResultLogServlet extends HttpServlet{
 			// 下载文件 转发
 			SFTP s = new SFTP();
 			try {
+//				SFTPUtil.getConnect(s);
+//				String directory = "/home/kuayu/software/apache-cassandra-3.11.6/logs";
+//				String downloadFile = "gaokeyong" + ".log";
+//				String saveFile = getServletContext().getRealPath("/logs");
+//				// 判断是否有文件 若有 删除 下载 若无下载
+//				File file = new File(saveFile + "/" + downloadFile);
+//				logger.info(file.getPath());  
+//				System.out.println(file.getPath());
+//				if (file.exists()) {
+//					file.delete();
+//				}
+//				SFTPUtil.download(directory, downloadFile, saveFile);
+//				SFTPUtil.disConn(s.getSession(), s.getChannel(), s.getSftp());
+//
+//				// 读取文件内容并显示在页面上
+//
+//				InputStream input = getServletContext().getResourceAsStream("/logs/" + downloadFile);
+//				byte[] buff = new byte[1024 * 10];// 可以自己 指定缓冲区的大小
+//				input.read(buff);
+//				String result = new String(buff);
+//	
+//				// 关闭输入输出流
+//				input.close();
+//				
+//				
+//				JSONObject jsonObj = new JSONObject();
+//				JSONArray jsonArr1 = new JSONArray();
+//				JSONArray jsonArr2 = new JSONArray();
+//				JSONArray jsonArr3 = new JSONArray();
+//				
+//				String[] str = result.split(" ");
+//				jsonArr1.add(str[0]);
+//				jsonArr2.add(str[1]);
+//				double num = (Double.valueOf(str[0])/(Double.valueOf(str[0])+Double.valueOf(str[1])))*100;
+//				logger.info("num："+num);  
+//				System.out.println("num："+num);
+//				String format = new DecimalFormat("#.00000000").format(num).split("//.")[0];
+//				logger.info(format); 
+//				System.out.println(format);
+//				jsonArr3.add(format);
+//				jsonObj.put("success", jsonArr1);
+//				jsonObj.put("fail", jsonArr2);
+//				jsonObj.put("probability", jsonArr3);
+//				PrintWriter out = null;
+//				out = resp.getWriter();
+//				
+//				logger.info(jsonObj.toString());  
+//				System.out.println(jsonObj.toString());
+//				out.write(jsonObj.toString()); 
+//				return;
+				
+				
+				
+				
+				
 				SFTPUtil.getConnect(s);
-				String directory = "/home/kuayu/software/apache-cassandra-3.11.6/logs";
-				String downloadFile = "gaokeyong" + ".log";
+				String directory = "/home/kuayu/file";
+				String downloadFile = "jilu.log";
 				String saveFile = getServletContext().getRealPath("/logs");
 				// 判断是否有文件 若有 删除 下载 若无下载
 				File file = new File(saveFile + "/" + downloadFile);
@@ -72,7 +125,7 @@ public class ResultLogServlet extends HttpServlet{
 				
 				String[] str = result.split(" ");
 				jsonArr1.add(str[0]);
-				jsonArr2.add(str[1]);
+				jsonArr2.add("1");
 				double num = (Double.valueOf(str[0])/(Double.valueOf(str[0])+Double.valueOf(str[1])))*100;
 				logger.info("num："+num);  
 				System.out.println("num："+num);

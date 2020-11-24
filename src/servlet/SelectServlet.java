@@ -53,7 +53,6 @@ public class SelectServlet extends HttpServlet{
 		System.out.println(jsonObj.toString());
 		out = resp.getWriter();
 		out.write(jsonObj.toString()); 
-		
 	}
 	public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		doGet(req,resp);

@@ -14,20 +14,29 @@
 <script type="text/javascript">
 $(function(){
 	var ips = new Array();
+	var addr = address + "/visualCass/nodestate_do";
+	
 	$.ajax({
-		url : "http://47.103.222.181:10000/visualCass/select_do",
+		url : addr,
 		dataType : "json",
-		type : "post",
+		type : "POST",
 		async : false,
 		success : function(data) { //如果请求成功，返回数据。
 			var sx = document.getElementById("wxh")
 			
 			var str = "";
 			$.each(data, function(i, item) {
+				if(item.safe == "0"){
 				str += "<tr class='unread'>" + 
             	"<td><a class='msgstar starred'></a></td>" +
             	"<td>"+ item.ip +"</td>" +
-                "</tr>"
+                "</tr>"					
+				}else{
+				str += "<tr class='unread'>" + 
+	            "<td><a class='msgstar'></a></td>" +
+	            "<td>"+ item.ip +"</td>" +
+	             "</tr>"		
+				}
 			})
 			sx.innerHTML = str;
 		}
@@ -41,33 +50,13 @@ $(function(){
     <div class="centercontent">
     
         <div class="pageheader">
-            <h1 class="pagetitle">安全配置</h1>
-            <span class="pagedesc">安全配置信息</span>
+            <h1 class="pagetitle">安全配置信息</h1>
 
         </div><!--pageheader-->
         
         <div id="contentwrapper" class="contentwrapper">
              
              <div id="inbox" class="subcontent">
-             
-                <div class="msghead">
-                    <ul class="msghead_menu">
-                        <li><a class="reportspam">Report Spam</a></li>
-                        <li class="marginleft5 dropdown" id="actions">
-                            <a class="dropdown_label" href="#actions">
-                            Actions
-                            <span class="arrow"></span>
-                            </a>
-                            <ul>
-                                <li><a href="">Mark as Read</a></li>
-                                <li><a href="">Mark as Unread</a></li>
-                                <li><a href="">Move to Folder</a></li>
-                                <li><a href="">Add Star</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                    <span class="clearall"></span>
-                </div><!--msghead-->
                 
                 <table cellpadding="0" cellspacing="0" border="0" class="stdtable mailinbox">
                     <thead>

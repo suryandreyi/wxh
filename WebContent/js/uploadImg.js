@@ -79,33 +79,33 @@ function submitPicture(url,data) {
 				var imgHeight = rdat.imageInfo.height;
 				var imgSize = rdat.imageInfo.daxiao;
 				
-				str += "<h5> 图高:";
+				str += "<h3> 图高:";
 				str += imgHeight;
-				str += "</h5>";
-				str += "<h5> 图宽:";
+				str += "</h3>";
+				str += "<h3> 图宽:";
 				str += imgWidth;
-				str += "</h5>";
-				str += "<h5> 分辨率:";
+				str += "</h3>";
+				str += "<h3> 分辨率:";
 				str += imgHeight+"*"+imgWidth;
-				str += "</h5>";
-				str += "<h5> 精确度:";
+				str += "</h3>";
+				str += "<h3> 精确度:";
 				str += imgPrecision;
-				str += "</h5>";
-				str += "<h5> 图大小:";
+				str += "</h3>";
+				str += "<h3> 图大小:";
 				str += imgSize;
-				str += "</h5>";
+				str += "</h3>";
 				
 				str += "<hr/>";
 				$.each((rdat.sbinfo),function(index,item){
-					str += "<h5> 准确率:";
+					str += "<h3> 准确率:";
 					str += item.score;
-					str += "</h5>";
-					str += "<h5> 位置:";
+					str += "</h3>";
+					str += "<h3> 位置:";
 					str += item.position;
-					str += "</h5>";						
-					str += "<h5> 类别:";
+					str += "</h3>";						
+					str += "<h3> 类别:";
 					str += item.class_name;					
-					str += "</h5>";
+					str += "</h3>";
 				});
 				sx.innerHTML = str;
 			}
