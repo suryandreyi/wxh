@@ -5,7 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>控制台页面</title>
+<title>基于自主学习的跨域QB统一索引检索系统</title>
 <link rel="stylesheet" href="css/style.default.css" type="text/css" />
 <link rel="stylesheet" href="css/loaders.css" type="text/css"/>
 <script src="js/jquery-3.3.1.js"></script>
@@ -22,12 +22,10 @@
 		$(function() {
 			var addr = address + "/visualCass/keyspace_do";
 			var itemaddr = address + "/visualCass/keytotable_do";
-			$
-					.ajax({
+			$.ajax({
 						url : addr,
 						dataType : "json",
 						type : "post",
-						async : false,
 						success : function(data) { //如果请求成功，返回数据。
 							var sx = document.getElementById("wxh");
 							var str = "";
@@ -50,6 +48,22 @@
 						}
 					})
 		});
+		
+		
+		
+		
+		function method_search() {
+			var href = address + "/visualCass/workData_do?type=search";
+			$.ajax({
+				url : href,
+				dataType : "json",
+				type : "post",
+				async : false,
+				success : function(data) {
+					window.location.href=address+"/visualCass/searchData.jsp"
+				}
+			})
+		}
 	</script>
 	<div class="bodywrapper">
 		<%@ include file="top.jsp"%>
@@ -63,6 +77,7 @@
 					<li class="current"><a href="#updates">基本信息</a></li>
 					<a href="http://47.103.222.181:10000/visualCass/insert_do?type=keyspace" class="btn btn2 btn_book"><span>添加</span></a>
 					<a href="http://47.103.222.181:10000/visualCass/insert_do?type=keyspace" class="btn btn2 btn_book"><span>删除</span></a>
+					<a class="btn btn2 btn_book" id="search" onclick="return method_search()"><span>查询</span></a>
 				</ul>
 			</div>
 			

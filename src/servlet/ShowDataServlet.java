@@ -51,7 +51,17 @@ public class ShowDataServlet extends HttpServlet{
 //		System.out.println(jsonObj.toString());
 //		jsonObj.put("column", columns);	
 		//获取数据
-		String cql2 = "select * from "+keyspace+"."+table+";";
+		String cql2="";
+		String type = req.getParameter("type");
+		if(type==null) {
+			cql2 = "select * from "+keyspace+"."+table+";";		
+		}else if(type.equals("search")) {
+			cql2 = req.getParameter("cql");
+			System.out.println(cql2);
+		}else {
+			cql2 = "select * from "+keyspace+"."+table+";";			
+		}
+		
 		System.out.println(cql2);
 		ResultSet rs2 =  session.execute(cql2);
 		

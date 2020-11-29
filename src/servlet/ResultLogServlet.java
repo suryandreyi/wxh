@@ -34,6 +34,67 @@ public class ResultLogServlet extends HttpServlet{
 	public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String type = req.getParameter("type");
 
+		if(type.equals("test10")) {
+			// 下载文件 转发
+			SFTP s = new SFTP();
+			try {
+				SFTPUtil.getimgConnect(s);
+				String directory = "/home/sx/data/image";
+				String downloadFile = "success.txt";
+				String saveFile = getServletContext().getRealPath("/logs");
+				// 判断是否有文件 若有 删除 下载 若无下载
+				File file = new File(saveFile + "/" + downloadFile);
+				logger.info(file.getPath());  
+				System.out.println(file.getPath());
+				if (file.exists()) {
+					file.delete();
+				}
+				SFTPUtil.downimgload(directory, downloadFile, saveFile);
+				SFTPUtil.disConn(s.getSession(), s.getChannel(), s.getSftp());
+
+				// 读取文件内容并显示在页面上
+
+				InputStream input = getServletContext().getResourceAsStream("/logs/" + downloadFile);
+				byte[] buff = new byte[1024 * 10];// 可以自己 指定缓冲区的大小
+				input.read(buff);
+				String result = new String(buff);
+	
+				// 关闭输入输出流
+				input.close();
+				
+				
+				JSONObject jsonObj = new JSONObject();
+				JSONArray jsonArr1 = new JSONArray();
+				JSONArray jsonArr2 = new JSONArray();
+				JSONArray jsonArr3 = new JSONArray();
+				
+				System.out.println("resulr:"+result);
+				jsonArr1.add(result);
+				jsonArr2.add(2000-Integer.valueOf(result));
+				double num = (Integer.valueOf(result)/(Integer.valueOf(2000))*100);
+				logger.info("num："+num);  
+				System.out.println("num："+num);
+				String format = new DecimalFormat("#.00000000").format(num).split("//.")[0];
+				logger.info(format); 
+				System.out.println(format);
+				jsonArr3.add(format);
+				jsonObj.put("success", jsonArr1);
+				jsonObj.put("fail", jsonArr2);
+				jsonObj.put("probability", jsonArr3);
+				PrintWriter out = null;
+				out = resp.getWriter();
+				
+				logger.info(jsonObj.toString());  
+				System.out.println(jsonObj.toString());
+				out.write(jsonObj.toString()); 
+				return;
+			} catch (Exception e) {
+				// TODO 自动生成的 catch 块
+				e.printStackTrace();
+			}
+		}
+		
+		
 		if(type.equals("test3")) {
 			// 下载文件 转发
 			SFTP s = new SFTP();
@@ -93,7 +154,7 @@ public class ResultLogServlet extends HttpServlet{
 				
 				
 				
-				SFTPUtil.getConnect(s);
+				SFTPUtil.getNumConnect(s);
 				String directory = "/home/kuayu/file";
 				String downloadFile = "jilu.log";
 				String saveFile = getServletContext().getRealPath("/logs");
@@ -104,7 +165,7 @@ public class ResultLogServlet extends HttpServlet{
 				if (file.exists()) {
 					file.delete();
 				}
-				SFTPUtil.download(directory, downloadFile, saveFile);
+				SFTPUtil.downNumload(directory, downloadFile, saveFile);
 				SFTPUtil.disConn(s.getSession(), s.getChannel(), s.getSftp());
 
 				// 读取文件内容并显示在页面上
@@ -123,10 +184,11 @@ public class ResultLogServlet extends HttpServlet{
 				JSONArray jsonArr2 = new JSONArray();
 				JSONArray jsonArr3 = new JSONArray();
 				
+				System.out.println("resulr:"+result);
 				String[] str = result.split(" ");
 				jsonArr1.add(str[0]);
 				jsonArr2.add("1");
-				double num = (Double.valueOf(str[0])/(Double.valueOf(str[0])+Double.valueOf(str[1])))*100;
+				double num = (Double.valueOf(str[0])/(Double.valueOf(str[0])+1))*100;
 				logger.info("num："+num);  
 				System.out.println("num："+num);
 				String format = new DecimalFormat("#.00000000").format(num).split("//.")[0];
@@ -227,7 +289,7 @@ public class ResultLogServlet extends HttpServlet{
 		}
 		
 		
-		Session session = DBUtil_ALL.getSess();
+		Session session = DBUtil_ONE.getSess();
 		
 		String taskName = req.getParameter("taskName");
 		
@@ -371,13 +433,14 @@ public class ResultLogServlet extends HttpServlet{
 			JSONArray jsonArr = new JSONArray();
 			Map <String, String> keyspaceinfos = new HashMap <String, String>();
 			
-			
+			int i=0;
 			for (Row row : listRow) {
-				if(Integer.parseInt(row.getString("tm"))>900) {
-					jsonArr.add(Integer.parseInt(row.getString("tm"))-200);
-				}else {
-					jsonArr.add(row.getString("tm"));					
-				}
+//				if(Integer.parseInt(row.getString("tm"))>900) {
+//					jsonArr.add(Integer.parseInt(row.getString("tm"))-200);
+//				}else {
+//					jsonArr.add(row.getString("tm"));					
+//				}
+				jsonArr.add(Integer.parseInt(row.getString("tm")));
 			}
 			
 			PrintWriter out = null;

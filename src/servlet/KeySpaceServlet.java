@@ -52,7 +52,12 @@ public class KeySpaceServlet extends HttpServlet{
 		for (Row row : listRow) {
 			keyspaceinfos.put("name", row.getString("keyspace_name"));
 			jsonObj1.put(row.getString("keyspace_name"), keyspaceinfos);
-			jsonObj2.put(row.getString("keyspace_name"), infos.get(row.getString("keyspace_name")));
+			String kif = infos.get(row.getString("keyspace_name"));
+			if(kif==null) {
+				kif="";
+			}
+			System.out.println(kif);
+			jsonObj2.put(row.getString("keyspace_name"), kif);
 		}
 		
 		PrintWriter out = null;

@@ -5,7 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>控制台页面</title>
+<title>字段信息</title>
 <link rel="stylesheet" href="css/style.default.css" type="text/css" />
 <link rel="stylesheet" href="css/loaders.css" type="text/css" />
 <script type="text/javascript" src="js/jquery-3.3.1.js"></script>
@@ -57,10 +57,40 @@ $(function(){
 			}
 	})
 });
-	function deldata() {
-		alert("删除");
+	
+function deldata() {
+		var key = "<%=request.getAttribute("keyspace")%>"
+		var tab = "<%=request.getAttribute("table")%>"
+		var href = address + "/visualCass/delete_do?type=Data&keyspace="+ key + "&table=" + tab + "";
+		$.ajax({
+			url : href,
+			dataType : "json",
+			type : "post",
+			async : false,
+			success : function(data) { //如果请求成功，返回数据。
+				
+			}
+})
+}
+function createIndex(){
+	var colname= prompt("请输入索引字段","");
+	var idx= prompt("请输入索引名","");
+	var key = "<%=request.getAttribute("keyspace")%>"
+	var tab = "<%=request.getAttribute("table")%>"
+	var href = address + "/visualCass/crindex_do";
+	
+	$.ajax({
+		url : href,
+		dataType : "json",
+		type : "post",
+		data : {"key":key,"tab":tab,"idx":idx,"col":colname},
+		async : false,
+		success : function(data) {
+			alert(idx+" 已设置为索引");
 		}
-	</script>
+	})
+}
+</script>
 	<div class="bodywrapper">
 		<%@ include file="top.jsp"%>
 		<%@ include file="leftMenu.jsp"%>
@@ -72,6 +102,7 @@ $(function(){
 					<li class="current"><a>基本信息</a></li>
 					<a id="add" class="btn btn2 btn_book"><span>添加</span></a>
 					<a id="delete" class="btn btn2 btn_book" onclick="return deldata()"><span>删除</span></a>
+				    <a id="index" class="btn btn2 btn_book" onclick="return createIndex()"><span>创建索引</span></a>
 				</ul>
 			</div>
 			<!--pageheader-->

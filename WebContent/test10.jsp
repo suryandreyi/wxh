@@ -5,104 +5,131 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>控制台页面</title>
+<title>指标10</title>
 <link rel="stylesheet" href="css/style.default.css" type="text/css" />
-<script src="js/jquery-3.3.1.js"></script>
+<script type="text/javascript" src="js/jquery-3.3.1.js"></script>
 </head>
 <body class="withvernav">
-	<style type="text/css">
-			*{
-				margin: 0;
-				padding: 0;
-			}
-			#upBox{
-				text-align: center;
-				width:500px;
-				padding: 20px;
-				border: 1px solid #666;
-				margin: auto;
-				margin-top: 50px;
-				margin-bottom: 200px;
-				position: relative;
-				border-radius: 10px;
-			}
-			#inputBox{
-				width: 100%;
-				height: 40px;
-				border: 1px solid cornflowerblue;
-				color: cornflowerblue;
-				border-radius: 20px;
-				position: relative;
-				text-align: center;
-				line-height: 40px;
-				overflow: hidden;
-				font-size: 16px;
-			}
-			#inputBox input{
-				width: 114%;
-				height: 40px;
-				opacity: 0;
-				cursor: pointer;
-				position: absolute;
-				top: 0;
-				left: -14%;
-				
-			}
-			#imgBox{
-				text-align: left;
-			}
-			.imgContainer{
-				display: inline-block;
-				width: 32%;
-				height: 150px;
-				margin-left: 1%;
-				border: 1px solid #666666;
-				position: relative;
-				margin-top: 30px;
-				box-sizing: border-box;
-			}
-			.imgContainer img{
-				width: 100%;
-				height: 150px;
-				cursor: pointer;
-			}
-			.imgContainer p{
-				position: absolute;
-				bottom: -1px;
-				left: 0;
-				width: 100%;
-				height: 30px;
-				background: black;
-				text-align: center;
-				line-height: 30px;
-				color: white;
-				font-size: 16px;
-				font-weight: bold;
-				cursor: pointer;
-				display: none;
-			}
-			.imgContainer:hover p{
-				display: block;
-			}
-			#btn{
-				display: inline-block;
-				text-align: center;
-				line-height: 30px;
-				outline: none;
-				width: 100px;
-				height: 30px;
-				background: cornflowerblue;
-				border: 1px solid cornflowerblue;
-				color: white;
-				cursor: pointer;
-				margin-top: 30px;
-				border-radius: 5px;
-			}
-		</style>
 	<script type="text/javascript">
 		function check() {
-			var addr = "http://183.250.164.68:15007/objectdetection";
-			$("#form").attr("action", addr);
+			var sx1 = document.getElementById("wxh");
+			var str1 = sx1.innerHTML;
+			str1 += "<h3> 开始测试 </h3>";
+			sx1.innerHTML = str1;
+
+			var addr = address + "/visualCass/targetSearch_do?type=test7";
+			var taskName = $("#tn").val();
+			var xh = document.getElementById("rn");
+			var str = "<option>" + taskName + "</option>"
+			xh.innerHTML = str;
+			$.ajax({
+				//几个参数需要注意一下
+				type : "POST",//方法类型
+				dataType : "json",//预期服务器返回的数据类型
+				url : addr,//url
+				data : $('#form1').serialize(),
+				success : function(result) {
+					str1 = sx1.innerHTML;
+					str1 += "<h3> 测试完成</h3>";
+					sx1.innerHTML = str1;
+				}
+			});
+		}
+
+		function close1() {
+			var sx = document.getElementById("wxh");
+			var s = $("#nodesel1").val();
+			var h = sx.innerHTML;
+			var str = h + "<h3>关闭节点:" + s + "</h3>";
+			sx.innerHTML = str;
+
+			var addr = address + "/visualCass/nodestate_do?stop=" + s;
+
+			$.ajax({
+				//几个参数需要注意一下
+				type : "POST",//方法类型
+				dataType : "json",//预期服务器返回的数据类型
+				url : addr,//url
+				success : function(result) {
+					if (result.resultCode == 200) {
+						var sx1 = document.getElementById("wxh");
+						var str1 = sx1.innerHTML += "<h3> 关闭节点成功</h3>";
+						sx1.innerHTML = str1;
+					} else {
+						alert(666);
+					}
+				}
+			});
+		}
+		function start1() {
+			var sx = document.getElementById("wxh");
+			var h = sx.innerHTML;
+
+			var s = $("#nodesel2").val();
+			var str = h + "<h3>开启节点:" + s + "</h3>";
+			sx.innerHTML = str;
+			var addr = address + "/visualCass/nodestate_do?start=" + s;
+
+			$.ajax({
+				//几个参数需要注意一下
+				type : "POST",//方法类型
+				dataType : "json",//预期服务器返回的数据类型
+				url : addr,//url
+				success : function(result) {
+					if (result.resultCode == 200) {
+						var sx1 = document.getElementById("wxh");
+						var str1 = sx1.innerHTML += "<h3> 开启节点成功</h3>";
+						sx1.innerHTML = str1;
+					} else {
+						alert(666);
+					}
+				}
+			});
+		}
+
+		function wachlog2() {
+			var addr = address + "/visualCass/result_do?type=test10";
+			var taskName = $("#tn").val();
+			$.ajax({
+				url : addr,
+				dataType : "json",
+				type : "post",
+				data : {
+					"taskName" : taskName
+				},
+				async : false,
+				success : function(data) { //如果请求成功，返回数据。
+					var sx = document.getElementById("wxh");
+					var str = sx.innerHTML + "<h3> 查询正确率:";
+					str += "<h3>success:" + data.success[0];
+					str += "<h3>error:" + data.fail[0];
+					str += "<h3>probability:" + data.probability[0] + "%";
+					sx.innerHTML = str;
+				}
+			})
+		}
+
+		function wachlog() {
+			var addr = address + "/visualCass/result_do?type=test7";
+			var taskName = $("#tn").val();
+			$.ajax({
+				url : addr,
+				dataType : "json",
+				type : "post",
+				data : {
+					"taskName" : taskName
+				},
+				async : false,
+				success : function(data) { //如果请求成功，返回数据。
+					var sx = document.getElementById("wxh");
+					var str = sx.innerHTML + "<h3> 日志记录:</h3>";
+					$.each(data.sumt, function(i, item) {
+						str += "<h3>" + item + "ms" + "         "
+								+ data.pert[i] + "s";
+					})
+					sx.innerHTML = str;
+				}
+			})
 		}
 	</script>
 	<div class="bodywrapper">
@@ -114,36 +141,73 @@
 				<div class="one_half">
 					<div class="widgetbox">
 						<div class="contenttitle2">
-							<h3>指标10</h3>
+							<h3>指标3</h3>
 						</div>
+						<p>
+							<label>节点信息</label>
+							<button class="submit radius2" id="sub" onclick="return close1()">关闭</button>
+							<span class="field"> <select name="nodesel" id="nodesel1"
+								class="uniformselect">
+									<option selected="selected">183.250.164.68</option>
+									<option>36.153.113.4</option>
+									<option>159.226.41.232</option>
+									<option>202.189.3.234</option>
+							</select>
+							</span>
+
+							<button class="submit radius2" id="sub" onclick="return start1()">开启</button>
+							<span class="field"> <select name="nodesel" id="nodesel2"
+								class="uniformselect">
+									<option selected="selected">183.250.164.68</option>
+									<option>36.153.113.4</option>
+									<option>159.226.41.232</option>
+									<option>202.189.3.234</option>
+							</select>
+							</span>
+						</p>
 						<!--contenttitle-->
-						<div class="file-box">
+						<form id="form1" class="stdform" onsubmit="return false"
+							action="##" method="post">
+							<p>
+								<label>数据库名</label> <span class="field"><input
+									type="text" name="key" class="smallinput" /></span>
+							</p>
+							<p>
+								<label>表名</label> <span class="field"><input type="text"
+									name="tab" class="smallinput" /></span>
+							</p>
+							<p>
+								<label>任务名</label> <span class="field"><input type="text"
+									name="taskname" class="smallinput" id="tn" /></span>
+							</p>
+							<p>
+								<label>文件路径</label> <span class="field"><input
+									type="text" name="filepath" class="smallinput" /></span>
+							</p>
+							<p>
+								<label>结果路径</label> <span class="field"><input
+									type="text" name="resultpath" class="smallinput" /></span>
+							</p>
+							<p>
+								<label>查询条目数</label> <span class="field"><input
+									type="text" name="insertSumnum" class="smallinput" /></span>
+							</p>
+							<p>
+								<label>结果统计</label> <span class="field"> <select
+									name="resultNum" class="uniformselect">
+										<option selected="selected">/100条</option>
+										<option>/20条</option>
+										<option>/500条</option>
+								</select>
 
-
-
-		<div style="width: 100%;height: 100vh;position: relative;">
-			<form id="upBox">
-				 <div id="inputBox"><input type="file" title="请选择图片" id="file" multiple accept="image/png,image/jpg,image/gif,image/JPEG"/>点击选择图片</div>
-			     <div id="imgBox"></div>
-			     <a id="btn">上传</a>
-			</form>
-		</div>
-		
-		<script src="js/uploadImg.js" type="text/javascript" charset="utf-8"></script>
-				<script type="text/javascript">
-			imgUpload({
-				inputId:'file', //input框id
-				imgBox:'imgBox', //图片容器id
-				buttonId:'btn', //提交按钮id
-				upUrl:'shibie_do',  //提交地址
-				data:'file1', //参数名
-				num:"5"//上传个数
-			})
-		</script>
-
-
-
-						</div>
+								</span>
+							</p>
+							<br clear="all" /> <br />
+							<p class="stdformbutton">
+								<button class="submit radius2" id="sub" onclick="return check()">查询</button>
+								<input type="reset" class="reset radius2" value="重置" />
+							</p>
+						</form>
 					</div>
 					<!--widgetbox-->
 				</div>
@@ -154,36 +218,31 @@
 						<div class="title">
 							<h3>指标详情</h3>
 						</div>
-						
-						
-						
-						
-						
 						<div class="widgetcontent">
 							<div id="tabs" style="display: inline-block">
-									<ul class="hornav">
-										<li id="target" class="current"><a>指标内容</a></li>
-									</ul>
-									<div id="showinfo" style="display: block">
-										<blockquote class="bq2 currentstatus marginbottom0">
-											<h3>目标提取与标注的准确率大于80%</h3>
-										</blockquote>
-									</div>
+								<ul class="hornav">
+									<li id="target" class="current"><a>指标内容</a></li>
+								</ul>
+								<div id="showinfo" style="display: block">
+									<blockquote class="bq2 currentstatus marginbottom0">
+										<h3>用例14：目标提取与标注的准确率大于80%</h3>
+									</blockquote>
 								</div>
+							</div>
 
 
-								<div id="tabs" style="display: inline-block">
-									<ul class="hornav">
-										<li id="pro" class="current"><a>测试流程</a></li>
-									</ul>
-									<div id="showprocess" style="display: block">
-										<blockquote class="bq2 currentstatus marginbottom0">
-										<h3>1.开启目标检测正确性验证</h3>
-										<h3>2.随机挑选的图像为测试集合</h3>
-										<h3>3.以测试检测框与标签框重合度是否大于50%为准，大于且类别正确则认为检测正确</h3>
-										</blockquote>
-									</div>
+							<div id="tabs" style="display: inline-block">
+								<ul class="hornav">
+									<li id="pro" class="current"><a>测试流程</a></li>
+								</ul>
+								<div id="showprocess" style="display: block">
+									<blockquote class="bq2 currentstatus marginbottom0">
+										<h3>1.选取不同类目的图片数据集；</h3>
+										<h3>2.输入命令”./shibie.sh 数据集路径”</h3>
+										<h3>3.输入命令”vim result.log”</h3>
+									</blockquote>
 								</div>
+							</div>
 						</div>
 						<!--widgetcontent-->
 					</div>
@@ -195,15 +254,18 @@
 						<div class="widgetcontent">
 							<p>
 								<label>选择任务</label>
-								<button class="submit radius2" id="sub" onclick="return check()">查看日志</button>
-								<span class="field"> <select name="resultNum"
+								<button class="submit radius2" id="sub"
+									onclick="return wachlog()">查看日志</button>
+								<span class="field"> <select name="resultName" id="rn"
 									class="uniformselect">
-										<option selected="selected"></option>
-										<option></option>
-										<option></option>
-										<option></option>
+										<option selected="selected">task3</option>
+										<option>Task2</option>
 								</select>
-								</span>
+								</span> &nbsp&nbsp&nbsp&nbsp
+								<button class="submit radius2" id="sub"
+									onclick="return wachlog2()">查看识别结果日志</button>
+
+
 								<div id="showinfo" style="display: block">
 									<blockquote class="bq2 currentstatus marginbottom0" id="wxh">
 									</blockquote>
@@ -211,7 +273,6 @@
 							</p>
 							<br />
 						</div>
-						<!--widgetcontent-->
 					</div>
 					<!--widgetbox-->
 				</div>
@@ -222,6 +283,5 @@
 		</div>
 		<!--bodywrapper-->
 	</div>
-
 </body>
 </html>

@@ -5,7 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>控制台页面</title>
+<title>数据信息</title>
 <link rel="stylesheet" href="css/style.default.css" type="text/css" />
 <script src="js/jquery-3.3.1.js"></script>
 </head>
@@ -71,11 +71,7 @@ function check() {
     <%@ include file="basic.jsp"%>    
     <div class="centercontent">
         <div class="pageheader">
-            <h1 class="pagetitle">data</h1>
-            <span class="pagedesc">数据信息</span>
-            <ul class="hornav">
-                 <li class="current">基本信息</li>
-            </ul>
+            <h1 class="pagetitle">数据信息</h1>
         </div><!--pageheader-->
         
         <div id="contentwrapper" class="contentwrapper">
@@ -89,7 +85,7 @@ function check() {
                 </table>  
                 <input id="hidTD1" type="hidden" name="strjson1" />  
                 <input id="hidTD2" type="hidden" name="strjson2" />  
-                <input id="sub" type="buttton" value="提交" onclick="return check()"/>
+                <button class="submit radius2" onclick="return check()">提交</button>
                 </form>         
              </div>
              <div id="compose" class="subcontent" style="display: none">&nbsp;</div>
@@ -99,4 +95,3 @@ function check() {
 
 </body>
 </html>
-1

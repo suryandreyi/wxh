@@ -33,6 +33,33 @@ public class TableServlet extends HttpServlet{
 		Session session = DBUtil.getSess();
 		
 		
+//		String cql = "select * from system_schema.tables where keyspace_name='"+keyspace+"';";
+//		System.out.println(cql);
+//		ResultSet rs =  session.execute(cql);
+//		List<Row> listRow = rs.all();
+//		System.out.println(listRow.size());
+//		JSONObject jsonObj = new JSONObject();
+//		Map <String, String> tables = new HashMap <String, String>();
+//		
+//		int i = 0;
+//		for (Row row : listRow) {
+//			String commnet = row.getString("comment");
+//			System.out.println(commnet);
+//			
+//	    	String pattern = "TableInfo.*COMMENT.*\"(.*)\"";
+//		    Pattern r = Pattern.compile(pattern);
+//		    Matcher m = r.matcher(commnet);
+//		    if(m.find()) {
+//		    	System.out.println("匹配："+m.group(1));
+//		    }
+//
+//			tables.put(m.group(1),row.getString("table_name"));
+//			i++;
+//		}
+		
+		
+		
+		
 		String cql = "select * from system_schema.tables where keyspace_name='"+keyspace+"';";
 		System.out.println(cql);
 		ResultSet rs =  session.execute(cql);
@@ -42,7 +69,9 @@ public class TableServlet extends HttpServlet{
 		Map <String, String> tables = new HashMap <String, String>();
 		
 		int i = 0;
+		System.out.println(listRow.size());
 		for (Row row : listRow) {
+			
 			String commnet = row.getString("comment");
 			System.out.println(commnet);
 			
@@ -52,10 +81,16 @@ public class TableServlet extends HttpServlet{
 		    if(m.find()) {
 		    	System.out.println("匹配："+m.group(1));
 		    }
-
-			tables.put(m.group(1),row.getString("table_name"));
+		    try {
+		    	tables.put(m.group(1),row.getString("table_name"));		    	
+		    }
+		    catch (Exception e) {
+		    	tables.put(row.getString("table_name"),row.getString("table_name"));
+		    }
 			i++;
 		}
+		
+		
 		
 		jsonObj.put(keyspace, tables);
 		

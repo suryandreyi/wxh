@@ -5,22 +5,11 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>控制台页面</title>
+<title>添加表</title>
 <link rel="stylesheet" href="css/style.default.css" type="text/css" />
 <script src="js/jquery-3.3.1.js"></script>
 </head>
 <body class="withvernav">
-<%
-
-if ((String)request.getAttribute("info") == "success") { %>
-
-    <script>
-
-    alert("添加Table成功！"); 
-
-   </script>
-
-<%}%>
 <script type="text/javascript">
 $(document).ready(function(){
 	var key ="<%=request.getParameter("key")%>"
@@ -34,9 +23,9 @@ $(document).ready(function(){
 		var fieldtype = "type_"+fieldname;
 		var str = $("#p1").html();
 		var str = str + 
-        	"<label>primary Column</label>"+
+        	"<label><H3>主键</H3></label>"+
             "<span class='field'><input type='text' name="+fieldname+" class='smallinput' /></span>"+
-            "<label>type</label>"+
+            "<label><H3>类型</H3></label>"+
             "<span class='field'>"+
             "<select name="+fieldtype+" class='uniformselect'>"+
             "	<option selected='selected'>text</option>"+
@@ -51,7 +40,7 @@ $(document).ready(function(){
             "    <option>timeuuid</option>"+
             "    <option>uuid</option>"+
             "</select>"+         
-            "</span>";
+            "</span>"+"</BR>";
 		$("#p1").html(str);
 	});
 	
@@ -63,9 +52,9 @@ $(document).ready(function(){
 		var fieldtype = "type_"+fieldname;
 		var str = $("#p2").html();
 		var str = str + 
-        	"<label>primary Column</label>"+
+        	"<label><H3>列</H3></label>"+
             "<span class='field'><input type='text' name="+fieldname+" class='smallinput' /></span>"+
-            "<label>type</label>"+
+            "<label><H3>类型</H3></label>"+
             "<span class='field'>"+
             "<select name="+fieldtype+" class='uniformselect'>"+
             "	<option selected='selected'>text</option>"+
@@ -80,27 +69,42 @@ $(document).ready(function(){
             "    <option>timeuuid</option>"+
             "    <option>uuid</option>"+
             "</select>"+         
-            "</span>";
+            "</span>"+"</BR>";
 		$("#p2").html(str);
 	});
 });
 
-function refer() {
-	$("#form1").submit();
-}
+function check() {
+	var addr = address + "/visualCass/insertTab_do";
+    $.ajax({
+        //几个参数需要注意一下
+            type: "POST",//方法类型
+            dataType: "json",//预期服务器返回的数据类型
+            url: addr ,//url
+            data: $('#form1').serialize(),
+            success: function (result) {
+            	console.log(result.info);
+                alert("mn");
+            },
+            error : function() {
+                alert("成功！");
+            }
+     });
+}	
 </script>
 <div class="bodywrapper">
-        <%@ include file="top.jsp" %>
+    <%@ include file="top.jsp" %>
     <%@ include file="leftMenu.jsp" %>
+    <%@ include file="basic.jsp"%>
     <div class="centercontent">
                <div id="contentwrapper" class="contentwrapper">
         	<div id="basicform" class="subcontent">                              
                     <div class="contenttitle2">
-                        <h3>添加Table</h3>
+                        <h3>添加表</h3>
                         <button id="addpri">添加主键</button>
                         <button id="addnormal">添加列</button>
                     </div><!--contenttitle-->
-                    <form id="form1" class="stdform" action="http://47.103.222.181:10000/visualCass/insertTab_do" method="post">  
+                    <form id="form1" class="stdform" onsubmit="return false" action="##" method="post">  
                     	<p>
                     	<label>表名</label>
                     	<span class='field'><input type='text' name="tab" class='smallinput' /></span>
@@ -111,8 +115,8 @@ function refer() {
                         </p>  
                         <br clear="all" /><br />
                         <p class="stdformbutton">
-                        	<button class="submit radius2" onclick="return refer()">Submit Button</button>
-                            <input type="reset" class="reset radius2" value="Reset Button" />
+                        	<button class="submit radius2" onclick="return check()">提交</button>
+                            <input type="reset" class="reset radius2" value="重置" />
                             <input id="prihid" type="hidden" name="prinum" value="0"/>  
                             <input id="norhid" type="hidden" name="nornum" value="0"/>
                             <input id="key" type="hidden" name="key" value="0"/>
@@ -123,6 +127,5 @@ function refer() {
         </div><!--contentwrapper-->
     </div><!--centercontent-->
 </div><!--bodywrapper-->
-
 </body>
 </html>

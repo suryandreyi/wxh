@@ -5,7 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>控制台页面</title>
+<title>节点位置</title>
 <link rel="stylesheet" href="css/style.default.css" type="text/css" />
 <script type="text/javascript" src="js/jquery-3.3.1.js"></script>
 </head>

@@ -16,7 +16,7 @@ if ((String)request.getAttribute("info") == "success") { %>
 
     <script>
 
-    alert("添加Keyspace成功！"); 
+    alert("添加数据库成功！"); 
 
    </script>
 
@@ -32,17 +32,17 @@ if ((String)request.getAttribute("info") == "success") { %>
         	<div id="basicform" class="subcontent">
                                 
                     <div class="contenttitle2">
-                        <h3>添加Keyspace</h3>
+                        <h3>添加数据库</h3>
                     </div><!--contenttitle-->
                     <form class="stdform" action="http://47.103.222.181:10000/visualCass/insertKey_do" method="post">
                     	
                         <p>
-                        	<label>KeySpace Name</label>
+                        	<label>数据库名</label>
                             <span class="field"><input type="text" name="input1" class="smallinput" /></span>
                         </p>
                         
                         <p>
-                        	<label>Strategy</label>
+                        	<label>部署方式</label>
                             <span class="field">
                             <select name="input3" class="uniformselect">
                             	<option selected="selected">NetworkTopologyStrategy</option>
@@ -52,14 +52,14 @@ if ((String)request.getAttribute("info") == "success") { %>
                             </span>
                         </p>
                         <p>
-                        	<label>replication</label>
+                        	<label>副本数</label>
                             <span class="field"><input type="text" name="input2" class="smallinput" /></span>
                         </p>         
                         <br clear="all" /><br />
                         
                         <p class="stdformbutton">
-                        	<button class="submit radius2">Submit Button</button>
-                            <input type="reset" class="reset radius2" value="Reset Button" />
+                        	<button class="submit radius2">提交</button>
+                            <input type="reset" class="reset radius2" value="重置" />
                         </p>
                     </form>
                     

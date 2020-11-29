@@ -58,7 +58,7 @@
 	opacity: 0.5
 }
 </style>
-<title>控制台页面</title>
+<title>指标2</title>
 <link rel="stylesheet" href="css/style.default.css" type="text/css" />
 <script src="js/jquery-3.3.1.js"></script>
 </head>
@@ -176,7 +176,7 @@
 									type="text" name="taskname" class="smallinput" id="tn"/></span>
 							</p>
 							<p>
-								<label>文件路径</label> <span class="field"><input
+								<label>数据集路径</label> <span class="field"><input
 									type="text" name="filepath" class="smallinput" /></span>
 							</p>
 							<p>
@@ -184,37 +184,22 @@
 									type="text" name="resultpath" class="smallinput" /></span>
 							</p>
 							<p>
-								<label>线程数</label> <span class="field"><input type="text"
-									name="input1" class="smallinput" /></span>
-							</p>
-							<p>
 								<label>插入条目数</label> <span class="field"><input
 									type="text" name="insertSumnum" class="smallinput" /></span>
-							</p>
-							<p>
-								<label>索引范围</label> <span class="field"> <select
-									name="input3" class="uniformselect">
-										<option selected="selected">全局索引</option>
-										<option>单机索引</option>
-								</select>
-								</span>
 							</p>
 							<p>
 								<label>结果统计</label> <span class="field"> <select
 									name="resultNum" class="uniformselect">
 										<option selected="selected">/100条</option>
-										<option>/5条</option>
-										<option>/10条</option>
-										<option>/1000条</option>
-										<option>/10000条</option>
+										<option>/20条</option>
+										<option>/500条</option>
 								</select>
-
 								</span>
 							</p>
 							<br clear="all" /> <br />
 							<p class="stdformbutton">
-								<button class="submit radius2" id="sub" onclick="return check()">查询</button>
-								<input type="reset" class="reset radius2" value="Reset Button" />
+								<button class="submit radius2" id="sub" onclick="return check()">插入</button>
+								<input type="reset" class="reset radius2" value="重置" />
 							</p>
 						</form>
 					</div>
@@ -234,7 +219,7 @@
 								</ul>
 								<div id="showinfo" style="display: block">
 									<blockquote class="bq2 currentstatus marginbottom0">
-										<h3>提供满足特定网络安全等级要求的底层透明数据传输能力。</h3>
+										<h3>用例4：提供满足特定网络安全等级要求的底层透明数据传输能力。</h3>
 									</blockquote>
 								</div>
 							</div>
@@ -246,12 +231,15 @@
 								</ul>
 								<div id="showprocess" style="display: block">
 									<blockquote class="bq2 currentstatus marginbottom0">
-										<h3>1.在客户端节点开启ipsec-vpn-Client，在系统数据节点开启ipsec-vpn-Server</h3>
-										<h3>2.在系统插入数据集数据</h3>
-										<h3>3.记录每100条数据插入成功后的时间</h3>
-										<h3>4.进行多次测试</h3>
-										<h3>5.关闭ipsec-vpn,重复以上测试</h3>
-										<h3>6.比较开启和关闭ipsec后数据传输的速度变化</h3>
+<h3>1.进入系统的可视化界面，点击开启安全模式按钮</h3>
+<h3>2.后台输入指令”systemctl status ipsec”，确认ipsec已开启</h3>
+<h3>3.选择数据库，数据表，任务名，选择条目数为5000的样本数据，选择日志文件存储位置，选择结果统计为/100条，点击插入按钮，点击插入按钮</h3>
+<h3>4.点击查看结果</h3>
+<h3>5.点击关闭安全模式按钮</h3>
+<h3>6.选择相同数据库，不同的数据表和任务名，选择条目数为5000的样本数据，选择日志文件存储位置，选择结果统计为/100条，点击插入按钮，点击插入按钮</h3>
+<h3>7.点击查看结果</h3>
+<h3>8.在样本数据集中，选择任意数据；</h3>
+<h3>9.根据该数据，在两个表中进行查询。</h3>
 									</blockquote>
 								</div>
 							</div>

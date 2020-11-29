@@ -5,7 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>控制台页面</title>
+<title>指标4</title>
 <link rel="stylesheet" href="css/style.default.css" type="text/css" />
 <script type="text/javascript" src="js/jquery-3.3.1.js"></script>
 </head>
@@ -77,23 +77,55 @@
 			});
 		}
 		function close1() {
-			setTimeout(function() {
-				var s = $("#nodesel1").val();
-				var sx = document.getElementById("wxh");
-				var h = sx.innerHTML;
-				var str = h+"<h3>关闭节点:" + s+"</h3>";
-				sx.innerHTML = str;
-			}, 2000);
+			var sx = document.getElementById("wxh");
+			var s = $("#nodesel1").val();
+			var h = sx.innerHTML;
+			var str = h+"<h3>关闭节点:" + s+"</h3>";
+			sx.innerHTML = str;
+			
+			var addr = address + "/visualCass/nodestate_do?stop="+s;
+			
+	        $.ajax({
+	            //几个参数需要注意一下
+	                type: "POST",//方法类型
+	                dataType: "json",//预期服务器返回的数据类型
+	                url: addr ,//url
+	                success: function (result) {
+	                	if(result.resultCode==200){
+		                	var sx1 = document.getElementById("wxh");
+							var str1 = sx1.innerHTML += "<h3> 关闭节点成功</h3>";
+							sx1.innerHTML = str1;                		
+	                	}else{
+	                		alert(666);
+	                	}
+	                }
+	         });
 		}
 
 		function start1() {
-			setTimeout(function() {
-				var s = $("#nodesel2").val();
-				var sx = document.getElementById("wxh");
-				var h = sx.innerHTML;
-				var str = h+"<h3>开启节点:" + s+"</h3>";
-				sx.innerHTML = str;
-			}, 2000);
+			var sx = document.getElementById("wxh");
+			var h = sx.innerHTML;
+			
+			var s = $("#nodesel2").val();
+			var str = h+"<h3>开启节点:"+s+"</h3>";
+			sx.innerHTML = str;
+			var addr = address + "/visualCass/nodestate_do?start="+s;
+			
+	        $.ajax({
+	            //几个参数需要注意一下
+	                type: "POST",//方法类型
+	                dataType: "json",//预期服务器返回的数据类型
+	                url: addr ,//url
+	                success: function (result) {
+	                	if(result.resultCode==200){
+		                	var sx1 = document.getElementById("wxh");
+							var str1 = sx1.innerHTML += "<h3> 开启节点成功</h3>";
+							sx1.innerHTML = str1;                		
+	                	}else{
+	                		alert(666);
+	                	}
+	                }
+	         });
 		}
 
 		function wachlog() {
@@ -179,10 +211,6 @@
 									type="text" name="resultpath" class="smallinput" /></span>
 							</p>
 							<p>
-								<label>线程数</label> <span class="field"><input type="text"
-									name="input1" class="smallinput" /></span>
-							</p>
-							<p>
 								<label>查询条目数</label> <span class="field"><input
 									type="text" name="insertSumnum" class="smallinput" /></span>
 							</p>
@@ -198,12 +226,9 @@
 								<label>结果统计</label> <span class="field"> <select
 									name="resultNum" class="uniformselect">
 										<option selected="selected">/100条</option>
-										<option>/5条</option>
-										<option>/10条</option>
-										<option>/1000条</option>
-										<option>/10000条</option>
+										<option>/20条</option>
+										<option>/500条</option>
 								</select>
-
 								</span>
 							</p>
 							<br clear="all" /> <br />
@@ -231,7 +256,7 @@
 								</ul>
 								<div id="showinfo" style="display: block">
 									<blockquote class="bq2 currentstatus marginbottom0">
-										<h3>网络分区时，孤儿节点仍可提供数据只读服务。</h3>
+										<h3>用例7：网络分区时，孤儿节点仍可提供数据只读服务。</h3>
 									</blockquote>
 								</div>
 							</div>
@@ -241,13 +266,11 @@
 								</ul>
 								<div id="showprocess" style="display: block">
 									<blockquote class="bq2 currentstatus marginbottom0">
-										<h3>1.设置集群的查询一致性级别为One，此时只要有一个节点执行命令成功就会返回成功结果</h3>
-										<h3>2.设置集群的其他操作一致性级别为ALL，此时需要所有节点执行命令成功才会返回成功结果</h3>
-										<h3>3.在客户端节点插入数据集数据</h3>
-										<h3>4.关闭某两地节点的系统进程，让系统中只剩一个孤儿节点</h3>
-										<h3>5.从数据集中随机读取数据，根据其中的主键信息从系统中查询数据</h3>
-										<h3>6.查询到的数据与数据集的数据进行比较</h3>
-										<h3>7.在系统中进行插入操作</h3>
+<h3>1.选择一个孤儿节点，在其他节点后台使用命令”ps -ef|grep cass”</h3>
+<h3>2.使用命令”kill -9 进程号”</h3>
+<h3>3.使用命令”nodetool status”</h3>
+<h3>4.在样本数据集中，选择任意数据</h3>
+<h3>5.根据该数据，在测试表中进行查询</h3>
 									</blockquote>
 								</div>
 							</div>

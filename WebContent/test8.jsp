@@ -5,7 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>控制台页面</title>
+<title>指标8</title>
 <link rel="stylesheet" href="css/style.default.css" type="text/css" />
 <script type="text/javascript" src="js/jquery-3.3.1.js"></script>
 <style>
@@ -54,7 +54,6 @@
 	background-color: rgba(224, 229, 232, 1);
 }
 
-
 .tworow .active {
 	color: white;
 }
@@ -63,20 +62,19 @@
 	width: 80px;
 	color: rgba(0, 54, 80, 1);
 }
-
 </style>
 </head>
 <body class="withvernav">
 	<script type="text/javascript">
 		//setInterval(wachlog, 3000);
-	
+
 		$(function() {
 			$("#hourlist").find("li").click(function() {
-				$("#hourlist li").each(function(){
+				$("#hourlist li").each(function() {
 					$(this).attr('class', '');
 					$(this).css('background-color', '');
 				})
-				
+
 				$(this).attr('class', 'active');
 				$(this).css('background-color', 'rgba(0, 54, 80, 1)');
 			})
@@ -87,10 +85,11 @@
 			var str1 = sx1.innerHTML;
 			str1 += "<h3> 开始测试 </h3>";
 			sx1.innerHTML = str1;
-			
+
 			var sx = $(".active").text();
-			
-			var addr = address + "/visualCass/targetInsert_do?type=test8&block="+sx;
+
+			var addr = address
+					+ "/visualCass/targetInsert_do?type=test8&block=" + sx;
 			var taskName = $("#tn").val();
 			var xh = document.getElementById("rn");
 			var str = "<option>" + taskName + "</option>"
@@ -108,21 +107,24 @@
 				}
 			});
 		}
-		
+
 		function wachlog() {
 			var addr = address + "/visualCass/result_do?type=test8";
-			var taskName = $("#tn").val();	
+			var taskName = $("#tn").val();
 			$.ajax({
 				url : addr,
 				dataType : "json",
 				type : "post",
-				data : {"taskName":taskName},
+				data : {
+					"taskName" : taskName
+				},
 				async : false,
 				success : function(data) { //如果请求成功，返回数据。
 					var sx = document.getElementById("wxh");
-					var str = sx.innerHTML+"<h3> 结果统计:</h3>";
+					var str = sx.innerHTML + "<h3> 结果统计:</h3>";
 					$.each(data.num, function(i, item) {
-						str += "<h3>条目数:"+item+"条       大小:"+data.sz[i]+"kb</h3>";
+						str += "<h3>条目数:" + item + "条       大小:" + data.sz[i]
+								+ "kb</h3>";
 					})
 					sx.innerHTML = str;
 				}
@@ -151,8 +153,8 @@
 								<li type="4">10M</li>
 								<li type="5">20M</li>
 							</ul>
-						</div>	
-						<hr/>
+						</div>
+						<hr />
 						<form id="form1" class="stdform" onsubmit="return false"
 							action="##" method="post">
 							<p>
@@ -175,33 +177,19 @@
 								<label>结果路径</label> <span class="field"><input
 									type="text" name="resultpath" class="smallinput" /></span>
 							</p>
-												<p>
-								<label>线程数</label> <span class="field"><input type="text"
-									name="input1" class="smallinput" /></span>
-							</p>
-							<p>
-								<label>索引范围</label> <span class="field"> <select
-									name="consistent" class="uniformselect">
-										<option selected="selected" name="a">全局索引</option>
-										<option name="o">单机索引</option>
-								</select>
-								</span>
-							</p>
 							<p>
 								<label>结果统计</label> <span class="field"> <select
 									name="resultNum" class="uniformselect">
-										<option selected="selected">/100条</option>
-										<option>/5条</option>
-										<option>/10条</option>
-										<option>/1000条</option>
-										<option>/10000条</option>
+										<option selected="selected">/500条</option>
+										<option>/20条</option>
+										<option>/100条</option>
 								</select>
 								</span>
 							</p>
 							<br clear="all" /> <br />
 							<p class="stdformbutton">
 								<button class="submit radius2" id="sub" onclick="return check()">查询</button>
-								<input type="reset" class="reset radius2" value="Reset Button" />
+								<input type="reset" class="reset radius2" value="重置" />
 							</p>
 						</form>
 
@@ -209,45 +197,43 @@
 					<!--widgetbox-->
 				</div>
 				<!--one_half-->
-				
-				
-				
-				
-				
-								<div class="one_half last">
+
+
+
+
+
+				<div class="one_half last">
 					<div class="widgetbox">
 						<br /> <br />
 						<div class="title">
 							<h3>指标详情</h3>
 						</div>
 						<div class="widgetcontent">
-															<div id="tabs" style="display: inline-block">
-									<ul class="hornav">
-										<li id="target" class="current"><a>指标内容</a></li>
-									</ul>
-									<div id="showinfo" style="display: block">
-										<blockquote class="bq2 currentstatus marginbottom0">
-											<h3>支持情报产品分片粒度多级可控。</h3>
-										</blockquote>
-									</div>
+							<div id="tabs" style="display: inline-block">
+								<ul class="hornav">
+									<li id="target" class="current"><a>指标内容</a></li>
+								</ul>
+								<div id="showinfo" style="display: block">
+									<blockquote class="bq2 currentstatus marginbottom0">
+										<h3>用例11：支持情报产品分片粒度多级可控。</h3>
+									</blockquote>
 								</div>
+							</div>
 
 
-								<div id="tabs" style="display: inline-block">
-									<ul class="hornav">
-										<li id="pro" class="current"><a>测试流程</a></li>
-									</ul>
-									<div id="showprocess" style="display: block">
-										<blockquote class="bq2 currentstatus marginbottom0">
-										<h3>1.设置分片大小为1M</h3>
-										<h3>2.在系统插入5M大小的数据</h3>
-										<h3>3.从文件中读取需要传输的数据，根据指定的分片大小将其切割</h3>
-										<h3>4.为每个分片分配分片id，并将其记录在分片表中</h3>
-										<h3>5.从系统中读取数据时，根据Partition Key到分片表中找到对应的分片id</h3>
-										<h3>6.根据分片id从系统中获得对应的分片数据，查看每个分片数据的大小，并对其拼接</h3>
-										</blockquote>
-									</div>
+							<div id="tabs" style="display: inline-block">
+								<ul class="hornav">
+									<li id="pro" class="current"><a>测试流程</a></li>
+								</ul>
+								<div id="showprocess" style="display: block">
+									<blockquote class="bq2 currentstatus marginbottom0">
+										<h3>1.在系统可视化界面中，选择分片大小为1M；</h3>
+										<h3>2.使用命令”ls -lh 5mb.txt”</h3>
+										<h3>3.选取大小为5M的输入数据集，点击插入数据按钮；</h3>
+										<h3>4.点击查看结果按钮，查看各个分片的大小和条目数。</h3>
+									</blockquote>
 								</div>
+							</div>
 						</div>
 						<!--widgetcontent-->
 					</div>
@@ -259,7 +245,8 @@
 						<div class="widgetcontent">
 							<p>
 								<label>选择任务</label>
-								<button class="submit radius2" id="sub" onclick="return wachlog()">查看日志</button>
+								<button class="submit radius2" id="sub"
+									onclick="return wachlog()">查看日志</button>
 								<span class="field"> <select name="resultName" id="rn"
 									class="uniformselect">
 										<option selected="selected">Task1</option>

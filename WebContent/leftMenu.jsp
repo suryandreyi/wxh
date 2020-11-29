@@ -53,8 +53,6 @@ a:link,a:visited,a:hover,a:active {
 		<li>
             <a href="###" class="one_bar">指标测试</a>
             <ul class="two_bar">
-				<li><a href="targetInsert.jsp">插入指标</a></li>
-				<li><a href="targetSearch.jsp">查找指标</a></li>
 				<li><a href="test1.jsp">指标1</a></li>
 				<li><a href="test2.jsp">指标2</a></li>
 				<li><a href="test3.jsp">指标3</a></li>
@@ -68,6 +66,5 @@ a:link,a:visited,a:hover,a:active {
             </ul>
         </li>
 	</ul>
-	<a class="togglemenu"></a> <br />
 	<br />
 </div>
